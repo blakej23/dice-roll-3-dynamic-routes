@@ -3,7 +3,7 @@ class DiceController < ApplicationController
     render({ :template => "dice_templates/homepage" })
   end
 
-  def roll_two_six
+  def roll_two_six 
     @rolls = []
 
     2.times do
@@ -46,4 +46,20 @@ class DiceController < ApplicationController
 
     render({ :template => "dice_templates/result_five_four" })
   end
+
+  def roll_fifty_six
+    @num_dice = params.fetch("number_of_dice").to_i
+    @number_of_sides = params.fetch("number_of_sides").to_i
+
+    @rolls = []
+
+    @num_dice.times do
+      dice = rand(1..@number_of_sides)
+      @rolls.push(dice)
+    end
+
+    render({ :template => "dice_templates/result_flexible" })
+  end
+
+
 end
